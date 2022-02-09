@@ -1,7 +1,7 @@
 /*
  * @Author       : Linloir
  * @Date         : 2022-02-07 16:22:59
- * @LastEditTime : 2022-02-07 23:48:29
+ * @LastEditTime : 2022-02-09 22:49:26
  * @Description  : 
  */
 import 'package:flutter/material.dart';
@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/Text': (context) => const TextPage(),
         '/Buttons': (context) => const ButtonPage(),
         '/Icons': (context) => const IconPage(),
+        '/Switch': (context) => const SwitchPage(),
       },
       initialRoute: '/',
     );
@@ -68,6 +69,15 @@ class HomePage extends StatelessWidget {
               ),
               onPressed: () => Navigator.of(context).pushNamed('/Icons'),
             ),
+            TextButton(
+              child: const Text(
+                'Switches & Check boxes',
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+              onPressed: () => Navigator.of(context).pushNamed('/Switch'),
+            )
           ],
         ),
       ),
@@ -249,6 +259,62 @@ class IconPage extends StatelessWidget {
             )),
             const Icon(Icons.fingerprint, color: Colors.red, size: 30,),
             const Icon(IconData(0xf414, fontFamily: "MaterialIcons"), color: Colors.green, size: 30),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SwitchPage extends StatefulWidget {
+  const SwitchPage({Key? key}) : super(key: key);
+
+  @override
+  State<SwitchPage> createState() => _SwitchPageState();
+}
+
+class _SwitchPageState extends State<SwitchPage> {
+  bool sw_1_state = false;
+  void sw_1_callback(bool newState) => setState(() => sw_1_state = newState);
+
+  bool? cb1State = false;
+  void cb1CallBack(bool? newState) => setState(() => cb1State = newState);
+
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Switches & Check boxes demo page'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Switch(
+              value: sw_1_state,
+              onChanged: sw_1_callback,
+              thumbColor: MaterialStateProperty.resolveWith((states){
+                if(states.contains(MaterialState.hovered) && !states.contains(MaterialState.selected)){
+                  return Colors.blue[100];
+                }
+              }),
+              splashRadius: 25.0,
+            ),
+            Checkbox(
+              value: cb1State,
+              onChanged: cb1CallBack,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+              //side: const BorderSide(width: 2.0, style: BorderStyle.solid),
+            ),
+            //Transform can be used to adjust size
+            Transform.scale(
+              scale: 2.0,
+              child: Checkbox(
+                value: cb1State,
+                onChanged: cb1CallBack,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+              ),
+            )
           ],
         ),
       ),
