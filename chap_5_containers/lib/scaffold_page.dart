@@ -1,7 +1,7 @@
 /*
  * @Author       : Linloir
  * @Date         : 2022-02-14 00:39:57
- * @LastEditTime : 2022-02-14 15:16:02
+ * @LastEditTime : 2022-02-15 00:23:43
  * @Description  : Scaffold demo page
  */
 
@@ -128,8 +128,15 @@ class _ScaffoldPageState extends State<ScaffoldPage> with SingleTickerProviderSt
   }
 }
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
+
+  @override
+  State<MyDrawer> createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
+  var _switchState = false;
 
   @override
   Widget build(BuildContext context){
@@ -141,7 +148,7 @@ class MyDrawer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 38.0),
+              padding: const EdgeInsets.only(top: 38.0, bottom: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -158,10 +165,29 @@ class MyDrawer extends StatelessWidget {
             ),
             Expanded(
               child: ListView(
-                children: const [
+                children: [
                   ListTile(
-                    leading: Icon(Icons.arrow_back),
-                    title: Text('Back'),
+                    leading: const Icon(Icons.arrow_back),
+                    title: const Text('Back'),
+                    onTap: (){
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(_switchState ? Icons.dark_mode_outlined : Icons.light_mode_outlined),
+                    title: Text(_switchState ? 'Dark mode' : 'Light mode'),
+                    trailing: Switch(
+                      onChanged: (state) => setState(() {
+                        _switchState = state;
+                      }),
+                      value: _switchState,
+                    ),
+                    onTap: (){
+                      setState(() {
+                        _switchState = !_switchState;
+                      });
+                    },
                   ),
                 ],
               ),
