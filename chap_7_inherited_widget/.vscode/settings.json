@@ -1,0 +1,6 @@
+{
+    "dart.flutterRunAdditionalArgs": [
+        "--web-renderer",
+        "html"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "dart.flutterRunAdditionalArgs": [
+        "--web-renderer",
+        "html"
+    ],
+    "dart.lineLength": 0
+}

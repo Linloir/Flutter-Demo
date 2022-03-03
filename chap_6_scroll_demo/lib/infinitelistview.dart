@@ -69,12 +69,14 @@ class _InfListViewPageState extends State<InfListViewPage> {
   void _retrieveData(){
     Future.delayed(Duration(seconds: 2)).then(
       (e){
-        setState(() {
-          buffer.insertAll(
-            buffer.length - 1,
-            generateWordPairs().take(20).map((e) => e.asPascalCase).toList()
-          );
-        });
+        if(mounted){
+          setState(() {
+            buffer.insertAll(
+              buffer.length - 1,
+              generateWordPairs().take(20).map((e) => e.asPascalCase).toList()
+            );
+          });
+        }
       }
     );
   }
