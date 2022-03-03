@@ -1,7 +1,7 @@
 /*
  * @Author       : Linloir
  * @Date         : 2022-03-03 09:37:16
- * @LastEditTime : 2022-03-03 14:59:54
+ * @LastEditTime : 2022-03-03 15:37:41
  * @Description  : model class
  */
 
@@ -35,6 +35,9 @@ class CartModel extends ChangeNotifier {
     print('Added');
   }
 
+  // Note: This override is NECCESSARY
+  //       Otherwise the inherited provider won't know whether
+  //       the data has changed or not
   @override
   bool operator ==(Object other) {
     if (other is CartModel) {
