@@ -1,7 +1,7 @@
 /*
  * @Author       : Linloir
  * @Date         : 2022-03-01 10:20:01
- * @LastEditTime : 2022-03-02 22:09:37
+ * @LastEditTime : 2022-03-03 17:01:14
  * @Description  : 
  */
 import 'package:flutter/material.dart';
@@ -33,8 +33,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _pressedCount = 0;
 
+  final test = TestBuildWidget();
+
   @override
   Widget build(BuildContext context) {
+    print('build called');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Inherited Widget Demo Page'),
@@ -44,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SharedDataWidget(
-              child: const TestBuildWidget(),
+              child: test,
               data: _pressedCount,
             ),
             Padding(
@@ -113,6 +116,6 @@ class TestBuildWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('Rebuilt');
-    return const TestWidget();
+    return TestWidget();
   }
 }

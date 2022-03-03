@@ -1,7 +1,7 @@
 /*
  * @Author       : Linloir
  * @Date         : 2022-03-02 15:05:36
- * @LastEditTime : 2022-03-03 14:47:02
+ * @LastEditTime : 2022-03-03 20:20:34
  * @Description  : 
  */
 import 'package:flutter/material.dart';
@@ -63,27 +63,83 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    print('build called');
+    return ChangeNotifierProvider<CartModel>(
+      // child: Builder(
+      //   builder: (context) {
+      //     print('Rebuilt');
+      //     return Column(
+      //       crossAxisAlignment: CrossAxisAlignment.center,
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+      //         Builder(
+      //           builder: (context) {
+      //             return Text("The total amount is ${InheritedProvider.of<CartModel>(context)?.data.total}");
+      //           },
+      //         ),
+      //         Padding(
+      //           padding: const EdgeInsets.all(10.0),
+      //           child: ElevatedButton(
+      //             child: const Text('Add item'),
+      //             onPressed: () {
+      //               InheritedProvider.of<CartModel>(context)?.data.add(const Item(price: 20, count: 1));
+      //             },
+      //           ),
+      //         ),
+      //         // Padding(
+      //         //   padding: const EdgeInsets.all(10.0),
+      //         //   child: ElevatedButton(
+      //         //     child: const Text('Reset'),
+      //         //     onPressed: () {
+      //         //       setState(() {
+      //         //         print('Reset');
+      //         //       });
+      //         //     },
+      //         //   ),
+      //         // ),
+      //       ],
+      //     );
+      //   },
+      // ),
+      // data: CartModel(),
+      // child: Column(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: [
+      //     Builder(
+      //       builder: (context) {
+      //         return Text("The total amount is ${InheritedProvider.of<CartModel>(context)?.data.total}");
+      //       },
+      //     ),
+      //     TestRebuildWidget(),
+      //     Builder(
+      //       builder: (context) {
+      //         return Padding(
+      //           padding: const EdgeInsets.all(10.0),
+      //           child: ElevatedButton(
+      //               child: const Text('Add item'),
+      //               onPressed: () {
+      //                 InheritedProvider.of<CartModel>(context)?.data.add(const Item(price: 20, count: 1));
+      //               }),
+      //         );
+      //       },
+      //     ),
+      //   ],
+      // ),
+      // data: CartModel(),
       child: Builder(
         builder: (context) {
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Builder(
-                builder: (context) {
-                  return Text("The total amount is ${context.dependOnInheritedWidgetOfExactType<InheritedProvider<CartModel>>()?.data.total}");
-                },
-              ),
+              Text("The total amount is ${InheritedProvider.of<CartModel>(context)?.data.total}"),
+              TestRebuildWidget(),
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ElevatedButton(
-                  child: const Text('Add item'),
-                  onPressed: () {
-                    context.dependOnInheritedWidgetOfExactType<InheritedProvider<CartModel>>()?.data.add(const Item(price: 20, count: 1));
-                  },
-                ),
-              )
+                  padding: const EdgeInsets.all(10.0),
+                  child: ElevatedButton(
+                      child: const Text('Add item'),
+                      onPressed: () {
+                        InheritedProvider.of<CartModel>(context)?.data.add(const Item(price: 20, count: 1));
+                      }))
             ],
           );
         },
@@ -93,22 +149,12 @@ class _CartState extends State<Cart> {
   }
 }
 
-class Tag extends StatefulWidget {
-  const Tag({Key? key}) : super(key: key);
+class TestRebuildWidget extends StatelessWidget {
+  const TestRebuildWidget({Key? key}) : super(key: key);
 
-  @override
-  State<Tag> createState() => _TagState();
-}
-
-class _TagState extends State<Tag> {
   @override
   Widget build(BuildContext context) {
-    return Text("Total abount is ${InheritedProvider.of<CartModel>(context)?.data.total}");
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    print('Dependency changed');
+    print('Rebuilt');
+    return const Text('');
   }
 }
