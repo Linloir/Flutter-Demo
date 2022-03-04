@@ -1,7 +1,7 @@
 /*
  * @Author       : Linloir
  * @Date         : 2022-03-04 10:38:09
- * @LastEditTime : 2022-03-04 22:27:29
+ * @LastEditTime : 2022-03-04 23:10:09
  * @Description  : 
  */
 import 'package:flutter/material.dart';
@@ -92,6 +92,44 @@ class _HomePageState extends State<HomePage> {
                 child: const Text('Check box dialog (1)'),
                 onPressed: () async {
                   var choice = await showCheckBoxDialog1(context: context);
+                  if(choice != null){
+                    setState((){
+                      lastChoice = "Last chose $choice";
+                    });
+                  }
+                  else{
+                    setState((){
+                      lastChoice = "Cancelled";
+                    });
+                  }
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                child: const Text('Check box dialog (2)'),
+                onPressed: () async {
+                  var choice = await showCheckBoxDialog2(context: context);
+                  if(choice != null){
+                    setState((){
+                      lastChoice = "Last chose $choice";
+                    });
+                  }
+                  else{
+                    setState((){
+                      lastChoice = "Cancelled";
+                    });
+                  }
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                child: const Text('Check box dialog (3)'),
+                onPressed: () async {
+                  var choice = await showCheckBoxDialog2(context: context);
                   if(choice != null){
                     setState((){
                       lastChoice = "Last chose $choice";
